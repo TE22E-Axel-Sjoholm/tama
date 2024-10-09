@@ -1,31 +1,34 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Main {
     static Scanner sc = new Scanner(System.in);
-    public static tama mytama = new tama();
 
     public static void main(String[] args) {
-        System.out.println("vad heter din tama?");
-        tama.name = sc.nextLine();
-        while(mytama.getAlive()) {
-            int val = menuChoice(new String[]{"Lär den nya ord", "Få den att säga något", "Gör ingenting", "Mata den", "Statistik om tama"});
-            if (val == 1) {
-                System.out.println("Vilket ord vill du lära den?");
-                mytama.teach(sc.nextLine());
-                mytama.tick();
-            } else if (val == 2) {
-                mytama.speak();
-                mytama.tick();
-            } else if (val == 3) {
-                mytama.tick();
-            } else if (val == 4){
-                mytama.feed();
-                mytama.tick();
-            } else if (val == 5){
-                mytama.printStats();
-                mytama.tick();
+        ArrayList<Tama> tamaList = new ArrayList<Tama>();
+        while (true) {
+            String name;
+            for(int i = 0; i < tamaList.size(); i++){
+                System.out.println(i+1 + ". Ladda " + tamaList.get(i).name);
             }
-            if(mytama.getAlive() == false) {
-                System.out.println(mytama.name + " dog, REST IN PEACE :SKULL:");
+            System.out.println(tamaList.size()+1 + ". Skapa en ny tama");
+            var val1 = sc.nextInt();
+            if (val1 == tamaList.size()+1) {
+                System.out.println("Vad ska din nya tama heta?");
+                sc.nextLine();
+                name = sc.nextLine();
+                Tama newTama = new Tama(name);
+                tamaList.add(newTama);
+                newTama.gameLoop();
+            } else if (val1 == 1) {
+                tamaList.get(0).gameLoop();
+            } else if (val1 == 2) {
+                tamaList.get(1).gameLoop();
+            } else if (val1 == 3) {
+                tamaList.get(2).gameLoop();
+            }else if (val1 == 4) {
+                tamaList.get(3).gameLoop();
+            } else if (val1 == 5) {
+                tamaList.get(4).gameLoop();
             }
         }
     }
@@ -37,9 +40,7 @@ public class Main {
                 System.out.println(i + 1 + ". " + val[i]);
             }
             var choice = sc.nextLine();
-            if (Character.isDigit(choice.charAt(0)) && choice.length() == 1) {
-                return Integer.parseInt(choice);
-            }
+            return Integer.parseInt(choice);
         }
     }
 }
