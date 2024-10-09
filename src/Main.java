@@ -4,7 +4,7 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        ArrayList<Tama> tamaList = new ArrayList<Tama>();
+        ArrayList<Tama> tamaList = new ArrayList<>();
         while (true) {
             String name;
             for(int i = 0; i < tamaList.size(); i++){
@@ -12,9 +12,9 @@ public class Main {
             }
             System.out.println(tamaList.size()+1 + ". Skapa en ny tama");
             var val1 = sc.nextInt();
+            sc.nextLine();
             if (val1 == tamaList.size()+1) {
                 System.out.println("Vad ska din nya tama heta?");
-                sc.nextLine();
                 name = sc.nextLine();
                 Tama newTama = new Tama(name);
                 tamaList.add(newTama);
